@@ -13,9 +13,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <ClerkProvider>
             <html lang="en">
-                <body>
+                <link rel="icon" href="/favicon.ico" sizes="any" />
+                <body className="flex flex-col h-screen">
                     <Nav />
-                    <div>{children}</div>
+                    <div className="flex-1 w-full justify-center items-center flex">{children}</div>
                 </body>
             </html>
         </ClerkProvider>
