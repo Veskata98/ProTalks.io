@@ -33,16 +33,19 @@ const Navbar = () => {
                 </Link>
 
                 {isLoggedIn ? (
-                    <Link href="/logout" className="text-white">
+                    <Link href="/logout" className="text-white mr-4">
                         Logout
                     </Link>
                 ) : (
-                    <Link href="/login" className="text-white">
-                        Login
-                    </Link>
+                    <>
+                        <Link href="/login" className="text-white mr-4">
+                            Login
+                        </Link>
+                        <Link href="/register" className="text-white mr-4">
+                            Register
+                        </Link>
+                    </>
                 )}
-
-                <p className="ml-4">{isLoggedIn ? 'George' : ''}</p>
                 <button onClick={() => setIsLoggedIn((prevState) => !prevState)} className="ml-4">
                     Toggle login
                 </button>

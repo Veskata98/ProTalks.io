@@ -3,13 +3,13 @@
 import { FormEvent, useState } from 'react';
 
 type LoginCredentials = {
-    username: string;
+    email: string;
     password: string;
 };
 
 export default function Login() {
     const [credentials, setCredentials] = useState<LoginCredentials>({
-        username: '',
+        email: '',
         password: '',
     });
 
@@ -17,19 +17,18 @@ export default function Login() {
         e.preventDefault();
         console.log(credentials);
         setCredentials((oldCredentials) => ({ ...oldCredentials, password: '' }));
+        localStorage.setItem('credentials', JSON.stringify(credentials));
     };
 
     return (
         <div>
             <h1>Login</h1>
             <form onSubmit={(e) => loginSubmitHandler(e)}>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="email">Email</label>
                 <input
-                    name="username"
-                    value={credentials.username}
-                    onChange={(e) =>
-                        setCredentials((oldCredentials) => ({ ...oldCredentials, username: e.target.value }))
-                    }
+                    name="email"
+                    value={credentials.email}
+                    onChange={(e) => setCredentials((oldCredentials) => ({ ...oldCredentials, email: e.target.value }))}
                     autoComplete="new-password"
                 />
                 <label htmlFor="password">Password</label>
