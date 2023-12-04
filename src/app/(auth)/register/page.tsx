@@ -1,16 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
 
-type RegisterCredentials = {
-    username: string;
-    email: string;
-    password: string;
-    repeatPassword: string;
-};
-
 export default function Register() {
+    const router = useRouter();
+
     const [credentials, setCredentials] = useState<RegisterCredentials>({
         username: '',
         password: '',
@@ -18,16 +14,33 @@ export default function Register() {
         email: '',
     });
 
-    const registerSubmitHandler = (e: FormEvent) => {
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const registerSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
-        console.log(credentials);
-        setCredentials((oldCredentials) => ({ ...oldCredentials, password: '' }));
-        localStorage.setItem('credentials', JSON.stringify(credentials));
+        // console.log(credentials);
+
+        if (Object.values(credentials).some((x) => x.length === 0)) {
+            setCredentials((oldCredentials) => ({ ...oldCredentials, password: '', repeatPassword: '' }));
+            setErrorMsg('All fields are required');
+            return;
+        }
+
+        if (credentials.password !== credentials.repeatPassword) {
+            setCredentials((oldCredentials) => ({ ...oldCredentials, password: '', repeatPassword: '' }));
+            setErrorMsg('Password do not match');
+            return;
+        }
+
+        await fetch('/api/auth', { method: 'POST', body: JSON.stringify(credentials) });
+
+        // router.push('/');
     };
 
     return (
         <div>
             <h1>Register</h1>
+            {errorMsg && <p>{errorMsg}</p>}
             <form onSubmit={(e) => registerSubmitHandler(e)}>
                 <label htmlFor="username">Username</label>
                 <input

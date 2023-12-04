@@ -2,11 +2,6 @@
 
 import { FormEvent, useState } from 'react';
 
-type LoginCredentials = {
-    email: string;
-    password: string;
-};
-
 export default function Login() {
     const [credentials, setCredentials] = useState<LoginCredentials>({
         email: '',

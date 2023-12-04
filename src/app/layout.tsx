@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 
-import Navbar from '@/components/Navbar';
-
-const inter = Inter({ subsets: ['latin'] });
+import Nav from '@/components/Nav';
+import { ClerkProvider } from '@clerk/nextjs';
 
 export const metadata: Metadata = {
     title: 'Pro Talks',
@@ -13,11 +11,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <Navbar />
-                {children}
-            </body>
-        </html>
+        <ClerkProvider>
+            <html lang="en">
+                <body>
+                    <Nav />
+                    <div>{children}</div>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }

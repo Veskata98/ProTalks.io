@@ -1,11 +1,11 @@
 'use client';
 
-import Login from '@/app/(auth)/login/page';
+import { useUser } from '@clerk/nextjs';
+import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import { useState } from 'react';
 
-const Navbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Nav = () => {
+    const { user, isLoaded } = useUser();
 
     return (
         <nav className="bg-blue-500 p-4 flex justify-between items-center">
@@ -32,26 +32,10 @@ const Navbar = () => {
                     FAQ
                 </Link>
 
-                {isLoggedIn ? (
-                    <Link href="/logout" className="text-white mr-4">
-                        Logout
-                    </Link>
-                ) : (
-                    <>
-                        <Link href="/login" className="text-white mr-4">
-                            Login
-                        </Link>
-                        <Link href="/register" className="text-white mr-4">
-                            Register
-                        </Link>
-                    </>
-                )}
-                <button onClick={() => setIsLoggedIn((prevState) => !prevState)} className="ml-4">
-                    Toggle login
-                </button>
+                {isLoaded && user && <UserButton afterSignOutUrl="/" />}
             </div>
         </nav>
     );
 };
 
-export default Navbar;
+export default Nav;
