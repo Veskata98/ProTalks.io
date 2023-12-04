@@ -12,7 +12,7 @@ const Nav = () => {
             <div className="text-white text-2xl font-bold">
                 <Link href="/">ProTalks.io</Link>
             </div>
-            <div className="flex">
+            <div className="flex items-center">
                 <Link href="/chat-rooms" className="text-white mr-4">
                     Chat Rooms
                 </Link>
@@ -33,6 +33,17 @@ const Nav = () => {
                 </Link>
 
                 {isLoaded && user && <UserButton afterSignOutUrl="/" />}
+
+                {!user && (
+                    <>
+                        <Link href="/sign-in" className="text-white mr-4">
+                            Sign In
+                        </Link>
+                        <Link href="/sign-up" className="text-white mr-4">
+                            Sign Up
+                        </Link>
+                    </>
+                )}
             </div>
         </nav>
     );
