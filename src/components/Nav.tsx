@@ -19,15 +19,20 @@ const Nav = () => {
                 <Link href="/about" className="text-white mr-4">
                     About Us
                 </Link>
-                <Link href="/profile" className="text-white mr-4">
-                    Profile
-                </Link>
-                <Link href="/become-a-host" className="text-white mr-4">
-                    Become a Host
-                </Link>
-                <Link href="/subscribe" className="text-white mr-4">
-                    Subscribe
-                </Link>
+                {isLoaded && user && (
+                    <>
+                        <Link href="/profile" className="text-white mr-4">
+                            Profile
+                        </Link>
+                        <Link href="/become-a-host" className="text-white mr-4">
+                            Become a Host
+                        </Link>
+                        <Link href="/subscribe" className="text-white mr-4">
+                            Subscribe
+                        </Link>
+                    </>
+                )}
+
                 <Link href="/faq" className="text-white mr-4">
                     FAQ
                 </Link>

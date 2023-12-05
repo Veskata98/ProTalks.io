@@ -3,6 +3,7 @@ import './globals.css';
 
 import Nav from '@/components/Nav';
 import { ClerkProvider } from '@clerk/nextjs';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
     title: 'Pro Talks',
@@ -14,9 +15,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ClerkProvider>
             <html lang="en">
                 <link rel="icon" href="/favicon.ico" sizes="any" />
-                <body className="flex flex-col h-screen">
-                    <Nav />
-                    <div className="flex-1 w-full justify-center items-center flex">{children}</div>
+                <body>
+                    <div className="h-screen flex flex-col">
+                        <Nav />
+                        <div className="flex-1 w-full justify-center items-center flex">{children}</div>
+                    </div>
+                    <Footer />
                 </body>
             </html>
         </ClerkProvider>
